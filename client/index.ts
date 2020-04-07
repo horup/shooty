@@ -74,6 +74,8 @@ app.ticker.add(()=>
                 }
             }, true);
         }
+
+        Object.values(client.state.things).forEach(t=>t.order = t.y);
         board.tick(app.ticker, client.state);
     }
 
