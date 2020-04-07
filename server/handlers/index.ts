@@ -57,7 +57,7 @@ export const tickHandler:Handler<State, Command> = (s, c, p)=>
                 let inputs = s.input[id];
                 for (let input of inputs)
                 {
-                    // no validation
+                    // TODO: no validation yet
                     t.x = input.x;
                     t.y = input.y;
                 }
