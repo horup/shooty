@@ -1,5 +1,5 @@
 
-import {State, Command, Thing} from '../..';
+import {State, Command, Thing, getThingsOfOwner} from '../..';
 import {Handler} from 'cmdserverclient';
 let nextId = 0;
 export const spawnHandler:Handler<State, Command> = (s, c, p)=>
@@ -30,5 +30,49 @@ export const spawnHandler:Handler<State, Command> = (s, c, p)=>
     }
     else if (c.tick)
     {
+    }
+}
+
+
+export const inputHandler:Handler<State, Command> = (s, c, p, o)=>
+{
+    if (c.input)
+    {
+        if (s.input[o] == null)
+            s.input[o] = [];
+        s.input[o].push(c.input);
+    }
+}
+
+export const tickHandler:Handler<State, Command> = (s, c, p)=>
+{
+    if (c.tick)
+    {
+        for (let id in s.input)
+        {
+            let thing = getThingsOfOwner(s, id)[0];
+            if (thing != null)
+            {
+                let t = {...thing[1]};
+                let inputs = s.input[id];
+                for (let input of inputs)
+                {
+                    // no validation
+                    t.x = input.x;
+                    t.y = input.y;
+                }
+
+                if (t.x != thing[1].x || t.y != thing[1].y)
+                {
+                    p({
+                        setThings:{
+                            [thing[0]]:t
+                        }
+                    }, true);
+                }
+            } 
+        }
+
+        s.input = {};
     }
 }

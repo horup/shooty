@@ -3,7 +3,7 @@ import * as express from 'express';
 import {Server} from 'cmdserverclient';
 import {State, Command, initialState} from '..';
 import { setThingsHandler, deleteThingsHandler } from '../handlers';
-import { spawnHandler } from './handlers';
+import { spawnHandler, inputHandler as inputHandler, tickHandler } from './handlers';
 const app = express();
 
 app.use(express.static('./dist/client'));
@@ -18,9 +18,14 @@ const server = new Server<State, Command>(initialState, {
 });
 
 server.handlers = [
+    tickHandler,
     spawnHandler,
     setThingsHandler,
     deleteThingsHandler
+]
+
+server.clientHandlers = [
+    inputHandler
 ]
 
 server.onClientConnected = (id)=>

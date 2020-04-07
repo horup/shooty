@@ -19,6 +19,8 @@ export interface State extends BoardState
         readonly height:number;
         readonly layers:Tile[][];
     };
+
+    input:{[id:string]:{x:number, y:number}[]}
 }
 
 export interface Command
@@ -28,11 +30,18 @@ export interface Command
     playerConnected?:{id:string};
     clientDisconnected?:{id:string};
     tick?:{};
+    input?:{x:number, y:number};
 }
 
 export const initialState:State = {
     things:{},
-    tilemap:{width:0, height:0, layers:[]}
+    tilemap:{width:0, height:0, layers:[]},
+    input:{}
+}
+
+export function getThingsOfOwner(state:State, owner:string)
+{
+    return Object.entries(state.things).filter(v=>v[1].owner == owner);
 }
 
 export * from './handlers';
