@@ -7,7 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build":"npm run build_server && npm run build_client",
     "build_server": "cd server && tsc",
-    "build_client":"cd && parcel build ./client/index.html -d dist/wwwroot"
+    "build_client":"cd && parcel build ./client/index.html -d dist/client",
+    "watch_server":"tsnd --respawn ./server/index.ts",
+    "watch_client":"parcel ./client/index.html -d dist/client"
   },
   "repository": {
     "type": "git",
