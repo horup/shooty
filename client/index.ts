@@ -2,7 +2,9 @@ declare var require;
 import * as PIXI from 'pixi.js';
 import {Board} from 'pixigamelib';
 import { AtlasMap } from 'pixigamelib/dist/atlas';
-import {State} from '../index';
+import {State, initialState, Command} from '..';
+import {Client} from 'cmdserverclient';
+import { setThingsHandler, deleteThingsHandler } from '../handlers';
 PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST;
 
 const app = new PIXI.Application({
@@ -15,31 +17,28 @@ const atlasmap:AtlasMap = {
 }
 
 const board = new Board(atlasmap);
-let state:State = {
-    things:{
-        "0":{
-            atlas:1,
-            frame:0,
-            order:1,
-            radius:1,
-            x:10,
-            y:10
-        }
-    },
-    tilemap:{
-        width:0,
-        height:0,
-        layers:[]
-    }
-}
 
 board.scale.set(32);
-
 app.stage.addChild(board);
+document.body.append(app.view);
+
+const client = new Client<State, Command>({
+    info:(s)=>console.log(s)
+});
+
+client.handlers = [
+    setThingsHandler,
+    deleteThingsHandler
+]
+client.connect("ws://localhost:8080").catch(r=>
+{
+
+});
 
 app.ticker.add(()=>
 {
-    board.tick(app.ticker, state);
+    if (client.state != null)
+    {
+        board.tick(app.ticker, client.state);
+    }
 });
-
-document.body.append(app.view);
