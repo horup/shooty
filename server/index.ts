@@ -45,7 +45,7 @@ server.onClientDisconnected = (id)=>
 server.attach(httpServer);
 setInterval(()=>{
     server.pushCommand({
-        tick:{}
-    }, false);
-}, 50);
+        serverTick:{}
+    }, true);
+}, 500);
 

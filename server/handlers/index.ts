@@ -28,7 +28,7 @@ export const spawnHandler:Handler<State, Command> = (s, c, p)=>
 
         my.forEach(v=>p({deleteThings:[v[0]]}, true));
     }
-    else if (c.tick)
+    else if (c.serverTick)
     {
     }
 }
@@ -46,7 +46,7 @@ export const inputHandler:Handler<State, Command> = (s, c, p, o)=>
 
 export const tickHandler:Handler<State, Command> = (s, c, p)=>
 {
-    if (c.tick)
+    if (c.serverTick)
     {
         for (let id in s.input)
         {

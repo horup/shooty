@@ -29,7 +29,8 @@ export interface Command
     deleteThings?:string[];
     playerConnected?:{id:string};
     clientDisconnected?:{id:string};
-    tick?:{};
+    serverTick?:{};
+    clientTick?:{id:string};
     input?:{x:number, y:number};
 }
 
