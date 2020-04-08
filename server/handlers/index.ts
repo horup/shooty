@@ -68,7 +68,7 @@ export const tickHandler:Handler<State, Command> = (s, c, p)=>
                 {
                     p({
                         spreadThings:{
-                            [thing[0]]:{position:t.position, prevPosition:t.prevPosition}
+                            [thing[0]]:{position:t.position}
                         }
                     }, true);
                   /*  p({

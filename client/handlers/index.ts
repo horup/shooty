@@ -17,7 +17,12 @@ const client = new TickrateCalculator(60);
 export const tickHandler:Handler<State, Command> = (s, c, p) =>
 {
     if (c.serverTick)
+    {
+        Object.values(s.things).forEach(t=>{
+            t.prevPosition = {...t.position};
+        })
         server.tick();
+    }
     if (!c.clientTick)
         return;
     const myId = c.clientTick.id;
