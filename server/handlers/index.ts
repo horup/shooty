@@ -11,8 +11,10 @@ export const spawnHandler:Handler<State, Command> = (s, c, p)=>
             frame:0,
             order:0,
             radius:1,
-            x:Math.random()*10,
-            y:Math.random()*10,
+            x:0,
+            y:0,
+            prevPosition:{x:0, y:0},
+            position:{x:Math.random()*10, y:Math.random()*10},
             owner:c.playerConnected.id
         }
 
@@ -55,20 +57,25 @@ export const tickHandler:Handler<State, Command> = (s, c, p)=>
             {
                 let t = {...thing[1]};
                 let inputs = s.input[id];
+                t.prevPosition = thing[1].position;
                 for (let input of inputs)
                 {
                     // TODO: no validation yet
-                    t.x = input.x;
-                    t.y = input.y;
+                    t.position = {x:input.x, y:input.y}
                 }
 
-                if (t.x != thing[1].x || t.y != thing[1].y)
+                if (t.position.x != thing[1].position.x || t.position.y != thing[1].position.y)
                 {
                     p({
+                        spreadThings:{
+                            [thing[0]]:{position:t.position, prevPosition:t.prevPosition}
+                        }
+                    }, true);
+                  /*  p({
                         setThings:{
                             [thing[0]]:t
                         }
-                    }, true);
+                    }, true);*/
                 }
             } 
         }

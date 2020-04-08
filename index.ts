@@ -4,6 +4,18 @@ export interface Thing extends BoardThing
 {
     /** The id of the owner of he thing */
     owner?:string;
+
+    /** client pos x */
+    x:number;
+
+    /** client pos y */
+    y:number;
+
+    /** Server position of thing */
+    position:{x:number, y:number};
+
+    /** Prev position of thing */
+    prevPosition:{x:number,y:number;}
 }
 
 export interface Tile extends BoardTile
@@ -26,6 +38,7 @@ export interface State extends BoardState
 export interface Command
 {
     setThings?:{[id:string]:Thing};
+    spreadThings?:{[id:string]:Partial<Thing>}
     deleteThings?:string[];
     playerConnected?:{id:string};
     clientDisconnected?:{id:string};
