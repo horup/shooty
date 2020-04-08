@@ -5,12 +5,6 @@ export interface Thing extends BoardThing
     /** The id of the owner of he thing */
     owner?:string;
 
-    /** client pos x */
-    x:number;
-
-    /** client pos y */
-    y:number;
-
     /** Server position of thing */
     position:{x:number, y:number};
 

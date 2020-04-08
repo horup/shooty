@@ -18,6 +18,9 @@ export const spawnHandler:Handler<State, Command> = (s, c, p)=>
             owner:c.playerConnected.id
         }
 
+        thing.x = thing.position.x;
+        thing.y = thing.position.y;
+
         p({
             setThings:{
                 [nextId++]:thing
