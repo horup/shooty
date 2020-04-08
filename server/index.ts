@@ -47,5 +47,5 @@ setInterval(()=>{
     server.pushCommand({
         serverTick:{}
     }, true);
-}, 500);
+}, 33);
 

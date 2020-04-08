@@ -50,6 +50,7 @@ export const tickHandler:Handler<State, Command> = (s, c, p) =>
     }
 
     Object.values(s.things).forEach(t=>{
+        t.order = t.y;
         if (t.owner != myId)
         {
             // interpolate things that are not mine
