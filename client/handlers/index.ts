@@ -67,15 +67,18 @@ function tickClient(s: State, c: Command, context: Context, p:(cmd:Command, tran
             // interpolate things that are not mine
             t.client.x = interpolateLinear(t.prevPosition.x, t.position.x, f);
             t.client.y = interpolateLinear(t.prevPosition.y, t.position.y, f);
-            t.client.zIndex = t.client.y;
+            
         }
         else {
             // mutate based upon input queue
             // t.x = t.position.x;
             // t.y = t.position.y;
         }
+
+        t.client.zIndex = t.client.y;
         context.sprites.setSprites({
             [id]: { ...t.client, frame: t.frame, atlas: t.atlas }
         });
     });
+    
 }

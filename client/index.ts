@@ -32,6 +32,7 @@ const loader = PIXI.Loader.shared
     }
     
     const sprites = new AtlasSpriteContainer(atlasmap);
+    sprites.sortableChildren = true;
     stage.addChild(sprites);
     stage.scale.set(32);
     
@@ -62,6 +63,7 @@ const loader = PIXI.Loader.shared
             }, false);
         }
     
+        sprites.sortChildren();
         iterations++;
     });
 
