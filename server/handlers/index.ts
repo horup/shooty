@@ -36,11 +36,11 @@ export const spawnHandler:Handler<State, Command> = (s, c, p)=>
 
 export const inputHandler:Handler<State, Command> = (s, c, p, o)=>
 {
-    if (c.input)
+    if (c.clientMove)
     {
         if (s.input[o] == null)
             s.input[o] = [];
-        s.input[o].push(c.input);
+        s.input[o].push(c.clientMove);
     }
 }
 

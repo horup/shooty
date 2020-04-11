@@ -41,7 +41,7 @@ const loader = PIXI.Loader.shared
     });
 
     client.context = {sprites:sprites};
-    
+    client.fakelagMs = 50;
     client.handlers = [
         tickHandler,
         setThingsHandler,

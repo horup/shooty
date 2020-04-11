@@ -48,7 +48,7 @@ export interface Command
     clientDisconnected?:{id:string};
     serverTick?:{};
     clientTick?:{id:string};
-    input?:{x:number, y:number};
+    clientMove?:{x:number, y:number};
 }
 
 export const initialState:State = {

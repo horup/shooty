@@ -54,7 +54,7 @@ function tickClient(s: State, c: Command, context: Context, p:(cmd:Command, tran
             else if (keys["KeyD"])
                 t.client.x += speed;
             p({
-                input:{
+                clientMove:{
                     x:t.client.x,
                     y:t.client.y
                 }
