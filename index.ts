@@ -1,6 +1,5 @@
-import { BoardState, BoardTileMap, BoardThing, BoardTile } from "pixigamelib";
 
-export interface Thing extends BoardThing
+export interface Thing
 {
     /** The id of the owner of he thing */
     owner?:string;
@@ -10,14 +9,17 @@ export interface Thing extends BoardThing
 
     /** Prev position of thing */
     prevPosition:{x:number,y:number;}
+
+    atlas:number;
+    frame:number;
 }
 
-export interface Tile extends BoardTile
+export interface Tile
 {
 
 }
 
-export interface State extends BoardState
+export interface State
 {
     things:{readonly [id:string]:Thing};
     tilemap: {

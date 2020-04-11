@@ -9,17 +9,10 @@ export const spawnHandler:Handler<State, Command> = (s, c, p)=>
         let thing:Thing = {
             atlas:1,
             frame:0,
-            order:0,
-            radius:1,
-            x:0,
-            y:0,
             prevPosition:{x:0, y:0},
             position:{x:Math.random()*10, y:Math.random()*10},
             owner:c.playerConnected.id
         }
-
-        thing.x = thing.position.x;
-        thing.y = thing.position.y;
 
         p({
             setThings:{
