@@ -27,8 +27,9 @@ export const deleteThingsHandler:Handler<State, Command> = (s,c,p)=>
     if (c.deleteThings)
     {
         let things = {...s.things};
-        for (let id of c.deleteThings)
+        for (let id in c.deleteThings)
         {
+
             delete things[id];
         }
 

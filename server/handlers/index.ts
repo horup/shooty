@@ -23,8 +23,10 @@ export const spawnHandler:Handler<State, Command> = (s, c, p)=>
     else if (c.clientDisconnected)
     {
         const my = Object.entries(s.things).filter(v=>v[1].owner == c.clientDisconnected.id);
+        let things = {};
+        my.forEach(v=>things[v[0]]={});
 
-        my.forEach(v=>p({deleteThings:[v[0]]}, true));
+        p({deleteThings:things}, true);
     }
     else if (c.serverTick)
     {

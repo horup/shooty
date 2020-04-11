@@ -24,6 +24,7 @@ const loader = PIXI.Loader.shared
 .load()
 .on('complete', ()=>
 {
+    status.text = "";
     const res = loader.resources;
     const atlasmap:AtlasMap = {
         0:{columns:16, rows:16, texture:res.tiles.texture.baseTexture},
@@ -34,9 +35,11 @@ const loader = PIXI.Loader.shared
     stage.addChild(sprites);
     stage.scale.set(32);
     
-    const client = new Client<State, Command>({
+    const client = new Client<State, Command, Context>({
         info:(s)=>console.log(s)
     });
+
+    client.context = {sprites:sprites};
     
     client.handlers = [
         tickHandler,
@@ -47,8 +50,6 @@ const loader = PIXI.Loader.shared
     {
     
     });
-    
-    
     
     let iterations = 0;
     app.ticker.add(()=>
@@ -64,9 +65,11 @@ const loader = PIXI.Loader.shared
         iterations++;
     });
 
-
-
-
 });
+
+export interface Context
+{
+    sprites:AtlasSpriteContainer;
+}
 
 

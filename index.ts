@@ -12,7 +12,14 @@ export interface Thing
 
     atlas:number;
     frame:number;
+
+    client?:{
+        x:number;
+        y:number;
+        zIndex:number;
+    }
 }
+
 
 export interface Tile
 {
@@ -31,11 +38,12 @@ export interface State
     input:{[id:string]:{x:number, y:number}[]}
 }
 
+
 export interface Command
 {
     setThings?:{[id:string]:Thing};
     spreadThings?:{[id:string]:Partial<Thing>}
-    deleteThings?:string[];
+    deleteThings?:{[id:string]:any};
     playerConnected?:{id:string};
     clientDisconnected?:{id:string};
     serverTick?:{};
